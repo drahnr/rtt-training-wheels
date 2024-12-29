@@ -1,0 +1,22 @@
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+# TODO(2) replace `$CHIP` with your chip's name (see `probe-run --list-chips` output)
+#runner = "probe-rs run --chip nRF52840_xxAA"
+#runner = "probe-rs run --chip nRF52832_xxAA"
+runner = "probe-rs run --chip nRF52832_xxAA --probe 1d50:6018:C1CA89E9 --protocol swd"
+
+rustflags = [
+  "-C", "linker=flip-link",
+  "-C", "link-arg=-Tlink.x",
+  "-C", "link-arg=-Tdefmt.x",
+  # This is needed if your flash or ram addresses are not aligned to 0x10000 in memory.x
+  # See https://github.com/rust-embedded/cortex-m-quickstart/pull/95
+  "-C", "link-arg=--nmagic",
+]
+
+[build]
+#target = "thumbv7em-none-eabihf" # Cortex-M4F and Cortex-M7F (with FPU)
+target = "thumbv7em-none-eabi" # Cortex-M4F and Cortex-M
+
+[alias]
+rb = "run --bin"
+rrb = "run --release --bin"

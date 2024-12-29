@@ -1,0 +1,13 @@
+[package]
+name = "rtt-training-wheels"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cortex-m = { version = "0.7.7", features = [] }
+cortex-m-rt = "0.7"
+panic-halt = "0.2.0"
+defmt-rtt = { version = "0.4" }
+defmt = { version = "0.3" }
+nrf-softdevice = { version = "*" , features = ["ble-peripheral", "nrf52832", "s132", "critical-section-impl"] }
+nrf-softdevice-s132 = { version = "*" }
